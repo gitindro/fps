@@ -1,0 +1,52 @@
+[submodule "code/dependencies/src/glfw"]
+	path = code/dependencies/src/glfw
+	url = https://github.com/mgerdes/minigolf.git
+	branch = master
+[submodule "code/dependencies/src/glm"]
+	path = code/dependencies/src/glm
+	url = https://github.com/g-truc/glm.git
+	branch = master
+[submodule "code/dependencies/src/imgui"]
+	path = code/dependencies/src/imgui
+	url = https://github.com/ocornut/imgui.git
+	branch = master
+[submodule "code/dependencies/src/Nuklear"]
+	path = code/dependencies/src/Nuklear
+	url = https://github.com/Immediate-Mode-UI/Nuklear.git
+	branch = master
+[submodule "code/dependencies/src/meshoptimizer"]
+	path = code/dependencies/src/meshoptimizer
+	url = https://github.com/zeux/meshoptimizer.git
+	branch = master
+[submodule "code/dependencies/src/optick"]
+	path = code/dependencies/src/optick
+	url = https://github.com/bombomby/optick.git
+	branch = master
+[submodule "code/dependenciessrc/easy_profiler"]
+	path = code/dependenciessrc/easy_profiler
+	url = https://github.com/yse/easy_profiler.git
+	branch = develop
+[submodule "code/dependencies/src/assimp"]
+	path = code/dependencies/src/assimp
+	url = https://github.com/assimp/assimp.git
+	branch = master
+[submodule "code/dependencies/src/ImGuizmo"]
+	path = code/dependencies/src/ImGuizmo
+	url = https://github.com/CedricGuillemet/ImGuizmo.git
+	branch = master
+[submodule "code/dependencies/src/Vulkan-Headers"]
+	path = code/dependencies/src/Vulkan-Headers
+	url = https://github.com/KhronosGroup/Vulkan-Headers.git
+	branch = main
+[submodule "code/dependencies/src/volk"]
+	path = code/dependencies/src/volk
+	url = https://github.com/zeux/volk.git
+	branch = master
+[submodule "code/dependencies/src/rapidjson"]
+	path = code/dependencies/src/rapidjson
+	url = https://github.com/Tencent/rapidjson.git
+	branch = master
+[submodule "code/dependencies/src/gli"]
+	path = code/dependencies/src/gli
+	url = https://github.com/g-truc/gli.git
+	branch = master
