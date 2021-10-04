@@ -50,3 +50,7 @@
 	path = code/dependencies/src/gli
 	url = https://github.com/g-truc/gli.git
 	branch = master
+[submodule "code/dependencies/src/easy_profiler"]
+	path = code/dependencies/src/easy_profiler
+	url = https://github.com/yse/easy_profiler.git
+	branch = develop
