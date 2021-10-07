@@ -1,7 +1,3 @@
-[submodule "code/dependencies/src/glfw"]
-	path = code/dependencies/src/glfw
-	url = https://github.com/mgerdes/minigolf.git
-	branch = master
 [submodule "code/dependencies/src/glm"]
 	path = code/dependencies/src/glm
 	url = https://github.com/g-truc/glm.git
@@ -54,3 +50,8 @@
 	path = code/dependencies/src/easy_profiler
 	url = https://github.com/yse/easy_profiler.git
 	branch = develop
+[submodule "code/dependencies/src/SOIL2"]
+	path = code/dependencies/src/SOIL2
+	url = https://github.com/gitindro/SOIL2.git
+	branch = master
+
