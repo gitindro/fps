@@ -55,3 +55,6 @@
 	url = https://github.com/gitindro/SOIL2.git
 	branch = master
 
+[submodule "code/dependencies/src/glfw"]
+	path = code/dependencies/src/glfw
+	url = https://github.com/glfw/glfw.git
