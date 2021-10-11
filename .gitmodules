@@ -18,10 +18,6 @@
 	path = code/dependencies/src/optick
 	url = https://github.com/bombomby/optick.git
 	branch = master
-[submodule "code/dependenciessrc/easy_profiler"]
-	path = code/dependenciessrc/easy_profiler
-	url = https://github.com/yse/easy_profiler.git
-	branch = develop
 [submodule "code/dependencies/src/assimp"]
 	path = code/dependencies/src/assimp
 	url = https://github.com/assimp/assimp.git
