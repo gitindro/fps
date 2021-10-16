@@ -1,0 +1,48 @@
+
+
+
+
+
+File verbosity level: 9
+date       time         ( uptime  ) [ thread name/id ]                   file:line     v| 
+2021-10-16 18:35:05.758 (   0.076s) [         7AE24A8]             loguru.cpp:827   INFO| Logging to 'core.log', mode: 'a', verbosity: 9
+2021-10-16 18:35:05.767 (   0.083s) [         7AE24A8]             engine.cpp:68    INFO| App init --- Start of app
+2021-10-16 18:35:05.771 (   0.087s) [         7AE24A8]             engine.cpp:70    INFO| Create Window
+2021-10-16 18:35:06.064 (   0.380s) [         7AE24A8]             engine.cpp:101   INFO| Created application window 
+2021-10-16 18:35:06.070 (   0.386s) [         7AE24A8]             engine.cpp:130   INFO| Engine run main loop
+
+
+
+
+
+File verbosity level: 9
+date       time         ( uptime  ) [ thread name/id ]                   file:line     v| 
+2021-10-16 18:36:22.104 (   0.131s) [        E0C506EC]             loguru.cpp:827   INFO| Logging to 'core.log', mode: 'a', verbosity: 9
+2021-10-16 18:36:22.114 (   0.139s) [        E0C506EC]             engine.cpp:68    INFO| App init --- Start of app
+2021-10-16 18:36:22.117 (   0.142s) [        E0C506EC]             engine.cpp:70    INFO| Create Window
+2021-10-16 18:36:22.321 (   0.346s) [        E0C506EC]             engine.cpp:101   INFO| Created application window 
+2021-10-16 18:36:22.327 (   0.352s) [        E0C506EC]             engine.cpp:130   INFO| Engine run main loop
+
+
+
+
+
+File verbosity level: 9
+date       time         ( uptime  ) [ thread name/id ]                   file:line     v| 
+2021-10-16 19:46:10.675 (   0.062s) [        45B85220]             loguru.cpp:827   INFO| Logging to 'core.log', mode: 'a', verbosity: 9
+2021-10-16 19:46:10.682 (   0.068s) [        45B85220]             engine.cpp:68    INFO| App init --- Start of app
+2021-10-16 19:46:10.685 (   0.072s) [        45B85220]             engine.cpp:70    INFO| Create Window
+2021-10-16 19:46:10.913 (   0.299s) [        45B85220]             engine.cpp:101   INFO| Created application window 
+2021-10-16 19:46:10.920 (   0.306s) [        45B85220]             engine.cpp:130   INFO| Engine run main loop
+
+
+
+
+
+File verbosity level: 9
+date       time         ( uptime  ) [ thread name/id ]                   file:line     v| 
+2021-10-16 19:47:41.072 (   0.055s) [        DA4322B3]             loguru.cpp:827   INFO| Logging to 'core.log', mode: 'a', verbosity: 9
+2021-10-16 19:47:41.078 (   0.061s) [        DA4322B3]             engine.cpp:68    INFO| App init --- Start of app
+2021-10-16 19:47:41.082 (   0.064s) [        DA4322B3]             engine.cpp:70    INFO| Create Window
+2021-10-16 19:47:41.285 (   0.267s) [        DA4322B3]             engine.cpp:101   INFO| Created application window 
+2021-10-16 19:47:41.294 (   0.276s) [        DA4322B3]             engine.cpp:130   INFO| Engine run main loop

@@ -5,7 +5,7 @@ namespace core
 	BoundingSphere::BoundingSphere()
 	{
 		mCenter = glm::vec3(0, 0, 0);
-		mRadius = 0f;
+		mRadius = 0.0f;
 	}
 
 	BoundingSphere::BoundingSphere(BoundingSphere& sphere)
@@ -22,15 +22,16 @@ namespace core
 	bool BoundingSphere::CheckCollision(glm::vec3& point)
 	{
 
+		return false;
 	}
 
 	bool BoundingSphere::CheckCollision(BoundingSphere& sphere)
 	{
-
+		return false;
 	}
 
 	bool BoundingSphere::CheckCollision(Aabb& aabb)
 	{
-
+		return false;
 	}
 }
