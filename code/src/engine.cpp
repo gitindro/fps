@@ -90,8 +90,26 @@ namespace core
 
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+
+        int target_width = config.window_width;
+        int target_height = config.window_height;
+        monitor = NULL;
+        if (config.fullscreen)
+        {
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, config.openglVersionMajor);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, config.openglVersionMinor);
+
+           
+            monitor = glfwGetPrimaryMonitor();
+
+            target_width = glfwGetVideoMode(glfwGetPrimaryMonitor())->width;
+            target_height = glfwGetVideoMode(glfwGetPrimaryMonitor())->height;
+        }
+
+
+        
         /* Create a windowed mode window and its OpenGL context */
-        GLFWwindow* window = glfwCreateWindow(config.window_width, config.window_height, config.name, NULL, NULL);
+        GLFWwindow* window = glfwCreateWindow(target_width, target_height, config.name, monitor, NULL);
 
         __app_windows[windowsCount].window = window;
         if (!window)

@@ -32,6 +32,7 @@ namespace core
 	{
 		private:
 			GLFWwindow* mWindow;
+			GLFWmonitor* monitor;
 			int			mWindowWidth;
 			int 		mWindowHeight;
 			int			mTargetFps;
