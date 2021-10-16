@@ -1,8 +1,18 @@
 #include "DebugUI.h"
-
+#include "DebugConsole.h"
 namespace DebugUI
 {
     const char* glsl_version = "#version 130";
+    DebugConsole console;
+    bool console_open = true;
+
+
+    void OnLog(void* user_data, const loguru::Message& message)
+    {
+        //printf("[%s] %s %d %s", message.preamble, message.filename, message.line, message.message);
+
+        console.AddLog("[%s] %s %d %s", message.preamble, message.indentation, message.line, message.message);
+    }
 
     void init(GLFWwindow* window)
     {
@@ -20,7 +30,12 @@ namespace DebugUI
         // Setup Platform/Renderer backends
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init(glsl_version);
+
+        loguru::add_callback("console_logger", OnLog, NULL, loguru::Verbosity_MAX);
+
     }
+
+
 
 
     void begin_frame()
@@ -33,7 +48,7 @@ namespace DebugUI
 
     void render_frame()
     {
-
+        console.Draw("console", &console_open);
         ImGui::Render();
     } 
 

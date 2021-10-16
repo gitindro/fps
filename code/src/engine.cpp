@@ -1,5 +1,7 @@
 #include "engine.h"
 #include "DebugUI.h"
+
+
 namespace core
 {
 
@@ -24,6 +26,7 @@ namespace core
                 (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
                 type, severity, message);
         }
+        printf("smg %d ", source);
     }
 
     static void __window_error_callback(int errorCode, const char* description)
@@ -116,6 +119,8 @@ namespace core
 
 
         g_engine = this;
+
+        DebugUI::init(window);
     }
 		
         
@@ -136,17 +141,18 @@ namespace core
             float delta = (now - mPreviousTime);
             mPreviousTime = now;
 
+
             // --> Update called every frame is fps dependent 
             // elapsed time is passed for user to write frame independent code
             update(delta);  
-
+            
 
             if(delta >= 0.25f) 
                 delta = 0.25f;
 
             mAccumulator += delta;
 
-            while (mAccumulator >= mFixedDeltaTime)
+            while (mAccumulator <= mFixedDeltaTime)
             {
                 // fixed update called fixed times in as frame
                 fixedUpdate(mFixedDeltaTime);
@@ -159,7 +165,8 @@ namespace core
             // called every frame with alpha value for user code to do any sort of interpolation
             render(alpha) ;
      
-
+            
+            
             /* Poll for and process events */
             glfwPollEvents();
         }
@@ -172,13 +179,16 @@ namespace core
         
     void Engine::render(float alpha)
     {
-        glfwGetFramebufferSize(mWindow, &mWindowWidth, &mWindowHeight);
-
+        glfwGetFramebufferSize(__app_windows[0].window, &mWindowWidth, &mWindowHeight);
+        DebugUI::begin_frame();
         glViewport(0, 0, mWindowWidth, mWindowHeight);
+        glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        DebugUI::render_frame();
+        DebugUI::end_frame();
             /* Swap front and back buffers */
-        glfwSwapBuffers(mWindow);
+        glfwSwapBuffers(__app_windows[0].window);
     }
 		
         
@@ -189,7 +199,7 @@ namespace core
 	
     void Engine::shutdown()
     {
-
+        DebugUI::shutdown();
         glfwDestroyWindow(mWindow);
         glfwTerminate();
     }
