@@ -1,7 +1,12 @@
 #pragma once
 
-
-namespace RenderContext
+namespace graphics
 {
+	
+	namespace RenderContext
+	{
 
+	}	
+	
 }
+

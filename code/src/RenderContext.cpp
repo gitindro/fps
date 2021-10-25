@@ -1,7 +1,13 @@
 #pragma once
 
 
-namespace RenderContext
+namespace gfx
 {
+	namespace RenderContext
+	{
+
+	}
 
 }
+
+

@@ -1,0 +1,5 @@
+_Headers_h_	D:\C++_work\fps_proj\fps\code\src\headers.h	/^#define _Headers_h_$/;"	macro	line:3
+SAFE_DELETE	D:\C++_work\fps_proj\fps\code\src\headers.h	/^#define SAFE_DELETE( p )       { if( p ) { delete ( p );     ( p ) = NULL; } }$/;"	macro	line:32
+SAFE_DELETE_ARRAY	D:\C++_work\fps_proj\fps\code\src\headers.h	/^#define SAFE_DELETE_ARRAY( p ) { if( p ) { delete[] ( p );   ( p ) = NULL; } }$/;"	macro	line:33
+SAFE_RELEASE	D:\C++_work\fps_proj\fps\code\src\headers.h	/^#define SAFE_RELEASE( p )      { if( p ) { ( p )->Release(); ( p ) = NULL; } }$/;"	macro	line:34
+ZERO_MEMORY	D:\C++_work\fps_proj\fps\code\src\headers.h	/^#define ZERO_MEMORY(Destination, Length) memset((Destination),0,(Length))$/;"	macro	line:35
