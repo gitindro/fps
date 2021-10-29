@@ -18,7 +18,7 @@ namespace Application
         std::string         title;
         int                 windowWidth;
         int                 windowHeight;
-        static GLFWwindow*     window;
+        GLFWwindow*         window;
 
     }WindowData;
 

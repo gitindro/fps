@@ -33,74 +33,58 @@
 
 namespace pow2
 {
-	template <typename T>
-	class HandleManager
+
+class HandleManager
+{
+public:
+	enum { MaxEntries = 4096 }; // 2^12
+
+	HandleManager();
+
+	void Reset();	
+	Handle Add(void* p, uint32 type);
+	void Update(Handle handle, void* p);
+	void Remove(Handle handle);
+	
+	void* Get(Handle handle) const;
+	bool Get(Handle handle, void*& out) const;
+	template< typename T > bool GetAs(Handle handle, T& out) const;
+
+	int GetCount() const;
+
+private:
+	HandleManager(const HandleManager&);
+	HandleManager& operator=(const HandleManager&);
+
+	struct HandleEntry
 	{
-	public:
-		enum { MaxEntries = 4096 }; // 2^12
-
-		HandleManager();
-
-		void Reset();
-		Handle<T> Add(void* p, uint32 type);
-		void Update(Handle<T> handle, void* p);
-		void Remove(Handle<T> handle);
-
-		void* Get(Handle<T> handle) const;
-		bool Get(Handle<T> handle, void*& out) const;
+		HandleEntry();
+		explicit HandleEntry(uint32 nextFreeIndex);
 		
-		template< typename T1 > bool GetAs(Handle<T> handle, T1& out) const
-		{
-			void* outAsVoid;
-			const bool rv = Get(handle, outAsVoid);
- #ifdef MSVC       
-			out = union_cast<T>(outAsVoid);
-#else
-    		out = reinterpret_cast<T>(outAsVoid); 
-#endif        
-
-			return rv;
-		}
-
-		int GetCount() const;
-
-	private:
-		HandleManager(const HandleManager&);
-		HandleManager& operator=(const HandleManager&);
-
-		struct HandleEntry
-		{
-			HandleEntry();
-			explicit HandleEntry(uint32 nextFreeIndex);
-
-			uint32 m_nextFreeIndex : 12;
-			uint32 m_counter : 15;
-			uint32 m_active : 1;
-			uint32 m_endOfList : 1;
-			void* m_entry;
-		};
-
-		HandleEntry m_entries[MaxEntries];
-
-		int m_activeEntryCount;
-		uint32 m_firstFreeEntry;
+		uint32 m_nextFreeIndex : 12;
+		uint32 m_counter : 15;
+		uint32 m_active : 1;
+		uint32 m_endOfList : 1;
+		void* m_entry;
 	};
 
-	/*
-	template< typename T, typename T1 >
-	inline bool HandleManager<T>::GetAs(Handle<T> handle, T1& out) const
-	{
-		void* outAsVoid;
-		const bool rv = Get(handle, outAsVoid);
- #ifdef MSVC       
-		out = union_cast<T>(outAsVoid);
-#else
-    out = reinterpret_cast<T>(outAsVoid); 
-#endif        
+	HandleEntry m_entries[MaxEntries];
 
-		return rv;
-	}
-*?*/
+	int m_activeEntryCount;
+	uint32 m_firstFreeEntry;
+};
+
+
+template< typename T >
+inline bool HandleManager::GetAs(Handle handle, T& out) const
+{
+	void* outAsVoid;
+	const bool rv = Get(handle, outAsVoid);
+	out = dynamic_cast<T>(outAsVoid);
+
+	return rv;
+}
+
 
 }
 

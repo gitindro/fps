@@ -81,7 +81,7 @@ namespace core
         if (!glfwInit())
         {
             LOG_F(ERROR, "Failed to initialize glfw app quiting");
-            return NULL;
+            return false;
         }
 
 
@@ -116,7 +116,7 @@ namespace core
         {
             glfwTerminate();
             LOG_F(ERROR, "glfwCreateWindow failed app quiting");
-            return NULL;
+            return false;
         }
 
         LOG_F(INFO, "Created application window ", config.name);
@@ -139,6 +139,8 @@ namespace core
         g_engine = this;
 
         DebugUI::init(window);
+
+        return true;
     }
 		
         

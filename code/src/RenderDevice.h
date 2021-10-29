@@ -70,15 +70,12 @@ namespace gfx
 
 		}vao;
 
-		typedef Handle<vbo> VertexBufferHandle;
-		typedef Handle<ibo> IndexBUfferHandle;
-		typedef Handle<vao> VertexArrayHandle;
 		
-		HandleManager<vbo> vbo_handle_mgr;
+		HandleManager vbo_handle_mgr;
 
-		HandleManager<ibo> ibo_handle_mgr;
+		HandleManager ibo_handle_mgr;
 
-		HandleManager<vao> vao_handle_mgr;
+		HandleManager vao_handle_mgr;
 
 
 		
@@ -87,13 +84,17 @@ namespace gfx
 			GLuint id;
 		};
 
-		VertexBufferHandle CreateVBO();
+		typedef Handle VertexBufferHandle;
+		typedef Handle IndexBufferHandle;
+		typedef Handle VertexArrayHandle;
+
+		Handle CreateVBO();
 
 		void DestroyVBO(VertexBufferHandle handle);
 
-		IndexBUfferHandle CreateIBO();
+		IndexBufferHandle CreateIBO();
 
-		void DestroyIBO(IndexBUfferHandle handle);
+		void DestroyIBO(IndexBufferHandle handle);
 
 		VertexArrayHandle CreateVAO();
 

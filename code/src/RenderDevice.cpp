@@ -6,13 +6,13 @@ namespace gfx
 	
 	namespace RenderDevice
 	{
-		VertexBufferHandle CreateVBO()
+		Handle CreateVBO()
 		{
 			HandleData hdata;
 
 			glCreateBuffers(1, &(hdata.id));
 
-			auto handle = vbo_handle_mgr.Add(&hdata, HandleTypes::VboHandle);
+			Handle handle = vbo_handle_mgr.Add((void*)&hdata, static_cast<uint32>(HandleTypes::VboHandle));
 
 			return handle;
 		}

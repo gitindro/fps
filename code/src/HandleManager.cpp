@@ -26,126 +26,125 @@
 */
 
 #include "HandleManager.h"
+//#include "Pow2Assert.h"
 #include "ppk_assert.h"
 #include <cstddef>
-
-#define POW2_ASSERT PPK_ASSERT
+ 
 
 namespace pow2
 {
 
 
-	template<typename T>
-	HandleManager<T>::HandleEntry::HandleEntry()
-		: m_nextFreeIndex(0)
-		, m_counter(1)
-		, m_active(0)
-		, m_endOfList(0)
-		, m_entry(NULL)
-	{}
 
-	template<typename T>
-	HandleManager<T>::HandleEntry::HandleEntry(uint32 nextFreeIndex)
-		: m_nextFreeIndex(nextFreeIndex)
-		, m_counter(1)
-		, m_active(0)
-		, m_endOfList(0)
-		, m_entry(NULL)
-	{}
+HandleManager::HandleEntry::HandleEntry() 
+	: m_nextFreeIndex(0)
+	, m_counter(1)
+	, m_active(0)
+	, m_endOfList(0)
+	, m_entry(NULL)
+{}
+
+HandleManager::HandleEntry::HandleEntry(uint32 nextFreeIndex)
+	: m_nextFreeIndex(nextFreeIndex)
+	, m_counter(1)
+	, m_active(0)
+	, m_endOfList(0)
+	, m_entry(NULL)
+{}
 
 
-	template<typename T>
-	HandleManager<T>::HandleManager()
-	{
-		Reset();
-	}
 
-	template<typename T>
-	void HandleManager<T>::Reset()
-	{
-		m_activeEntryCount = 0;
-		m_firstFreeEntry = 0;
+HandleManager::HandleManager()
+{
+	Reset();
+}
 
-		for (int i = 0; i < MaxEntries - 1; ++i)
-			m_entries[i] = HandleEntry(i + 1);
-		m_entries[MaxEntries - 1] = HandleEntry();
-		m_entries[MaxEntries - 1].m_endOfList = true;
-	}
 
-	template<typename T>
-	Handle<T> HandleManager<T>::Add(void* p, uint32 type)
-	{
-		POW2_ASSERT(m_activeEntryCount < MaxEntries - 1);
-		POW2_ASSERT(type >= 0 && type <= 31);
+void HandleManager::Reset()
+{
+	m_activeEntryCount = 0;
+	m_firstFreeEntry = 0;
 
-		const int newIndex = m_firstFreeEntry;
-		POW2_ASSERT(newIndex < MaxEntries);
-		POW2_ASSERT(m_entries[newIndex].m_active == false);
-		POW2_ASSERT(!m_entries[newIndex].m_endOfList);
+	for (int i = 0; i < MaxEntries - 1; ++i)
+		m_entries[i] = HandleEntry(i + 1);
+	m_entries[MaxEntries - 1] = HandleEntry();
+	m_entries[MaxEntries - 1].m_endOfList = true;
+}
 
-		m_firstFreeEntry = m_entries[newIndex].m_nextFreeIndex;
-		m_entries[newIndex].m_nextFreeIndex = 0;
-		m_entries[newIndex].m_counter = m_entries[newIndex].m_counter + 1;
-		if (m_entries[newIndex].m_counter == 0)
-			m_entries[newIndex].m_counter = 1;
-		m_entries[newIndex].m_active = true;
-		m_entries[newIndex].m_entry = p;
 
-		++m_activeEntryCount;
+Handle HandleManager::Add(void* p, uint32 type)
+{
+	PPK_ASSERT(m_activeEntryCount < MaxEntries - 1);
+	PPK_ASSERT(type >= 0 && type <= 31);
 
-		return Handle(newIndex, m_entries[newIndex].m_counter, type);
-	}
+	const int newIndex = m_firstFreeEntry;
+	PPK_ASSERT(newIndex < MaxEntries);
+	PPK_ASSERT(m_entries[newIndex].m_active == false);
+	PPK_ASSERT(!m_entries[newIndex].m_endOfList);
 
-	template<typename T>
-	void HandleManager<T>::Update(Handle<T> handle, void* p)
-	{
-		const int index = handle.m_index;
-		POW2_ASSERT(m_entries[index].m_counter == handle.m_counter);
-		POW2_ASSERT(m_entries[index].m_active == true);
+	m_firstFreeEntry = m_entries[newIndex].m_nextFreeIndex;
+	m_entries[newIndex].m_nextFreeIndex = 0;
+	m_entries[newIndex].m_counter = m_entries[newIndex].m_counter + 1;
+	if (m_entries[newIndex].m_counter == 0)
+		m_entries[newIndex].m_counter = 1;
+	m_entries[newIndex].m_active = true;
+	m_entries[newIndex].m_entry = p;
 
-		m_entries[index].m_entry = p;
-	}
+	++m_activeEntryCount;
 
-	template<typename T>
-	void HandleManager<T>::Remove(const Handle<T> handle)
-	{
-		const uint32 index = handle.m_index;
-		POW2_ASSERT(m_entries[index].m_counter == handle.m_counter);
-		POW2_ASSERT(m_entries[index].m_active == true);
+	return Handle (newIndex, m_entries[newIndex].m_counter, type);
+}
 
-		m_entries[index].m_nextFreeIndex = m_firstFreeEntry;
-		m_entries[index].m_active = 0;
-		m_firstFreeEntry = index;
 
-		--m_activeEntryCount;
-	}
+void HandleManager::Update(Handle handle, void* p)
+{
+	const int index = handle.m_index;
+	PPK_ASSERT(m_entries[index].m_counter == handle.m_counter);
+	PPK_ASSERT(m_entries[index].m_active == true);
 
-	template<typename T>
-	void* HandleManager<T>::Get(Handle<T> handle) const
-	{
-		void* p = NULL;
-		if (!Get(handle, p))
-			return NULL;
-		return p;
-	}
+	m_entries[index].m_entry = p;
+}
 
-	template<typename T>
-	bool HandleManager<T>::Get(const Handle<T> handle, void*& out) const
-	{
-		const int index = handle.m_index;
-		if (m_entries[index].m_counter != handle.m_counter ||
-			m_entries[index].m_active == false)
-			return false;
 
-		out = m_entries[index].m_entry;
-		return true;
-	}
+void HandleManager::Remove(const Handle handle)
+{
+	const uint32 index = handle.m_index;
+	PPK_ASSERT(m_entries[index].m_counter == handle.m_counter);
+	PPK_ASSERT(m_entries[index].m_active == true);
 
-	template<typename T>
-	int HandleManager<T>::GetCount() const
-	{
-		return m_activeEntryCount;
-	}
+	m_entries[index].m_nextFreeIndex = m_firstFreeEntry;
+	m_entries[index].m_active = 0;
+	m_firstFreeEntry = index;
+
+	--m_activeEntryCount;
+}
+
+
+void* HandleManager::Get(Handle handle) const
+{
+	void* p = NULL;
+	if (!Get(handle, p))
+		return NULL;
+	return p;
+}
+
+
+bool HandleManager::Get(const Handle handle, void*& out) const
+{
+	const int index = handle.m_index;
+	if (m_entries[index].m_counter != handle.m_counter ||
+	    m_entries[index].m_active == false)
+		return false;
+
+	out = m_entries[index].m_entry;
+	return true;
+}
+
+
+int HandleManager::GetCount() const
+{
+	return m_activeEntryCount;
+}
 
 
 }
