@@ -54,3 +54,6 @@
 [submodule "code/dependencies/src/glfw"]
 	path = code/dependencies/src/glfw
 	url = https://github.com/glfw/glfw.git
+[submodule "code/dependencies/src/physfs"]
+	path = code/dependencies/src/physfs
+	url = https://github.com/icculus/physfs.git

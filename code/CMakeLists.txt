@@ -19,7 +19,7 @@ endif()
 
 add_subdirectory(dependencies/src/glfw)
 add_subdirectory(dependencies/src/SOIL2)
-
+add_subdirectory(dependencies/src/physfs)
 
 set(GLAD_SOURCES dependencies/glad/src/gl.c)
 
