@@ -18,7 +18,7 @@ endif()
 
 
 add_subdirectory(dependencies/src/glfw)
-
+add_subdirectory(dependencies/src/SOIL2)
 
 
 set(GLAD_SOURCES dependencies/glad/src/gl.c)
@@ -50,6 +50,7 @@ add_library(imgui ${IMGUI_SOURCES})
 
 
 include_directories(dependencies/src/glfw/include)
+include_directories(dependencies/src/SOIL2/src/SOIL2)
 include_directories(dependencies/glad/include)
 include_directories(dependencies/src/glm)
 include_directories(dependencies/src/imgui)
@@ -57,9 +58,10 @@ include_directories(dependencies/src/imgui)
 set_property(TARGET glfw            PROPERTY FOLDER "ThirdPartyLibraries")
 set_property(TARGET glad            PROPERTY FOLDER "ThirdPartyLibraries")
 set_property(TARGET imgui           PROPERTY FOLDER "ThirdPartyLibraries")
-
+set_property(TARGET soil2           PROPERTY FOLDER "ThirdPartyLibraries")
 
 SETUP_APP(fps_cmake "shooter")
 
 
-target_link_libraries(fps_cmake glad glfw imgui)
+target_link_libraries(fps_cmake glad glfw imgui soil2)
+add_subdirectory(src/CommandBuffer)

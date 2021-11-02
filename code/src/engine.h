@@ -69,4 +69,4 @@ namespace core
 	extern Engine* g_engine;
 }
 
-#endif _Engine_h_
+#endif //_Engine_h_

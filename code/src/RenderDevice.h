@@ -77,7 +77,8 @@ namespace gfx
 
 		HandleManager vao_handle_mgr;
 
-
+		HandleManager texture_handle_mgr;
+		
 		
 		struct HandleData
 		{

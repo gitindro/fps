@@ -1,12 +1,17 @@
-#pragma once
+#ifndef _RenderContext_h_
+#define _RenderContext_h_
 
-namespace graphics
+namespace gfx
 {
 	
-	namespace RenderContext
+	struct RenderContext
 	{
+		/* data */
+		
+	};
 
-	}	
 	
 }
 
+
+#endif //_RenderContext_h_

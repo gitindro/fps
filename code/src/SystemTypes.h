@@ -41,6 +41,7 @@ typedef tFloatVec::iterator tFloatVecIt;
 
 
 typedef unsigned int	Uint32;
+typedef Uint32          u32;
 
 
 #endif // ! SystemTypes_h_
