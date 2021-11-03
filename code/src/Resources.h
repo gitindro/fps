@@ -4,10 +4,17 @@
 
 #include "headers.h"
 #include "HandleResManager.h"
+#include "physfs.h"
+
 
 
 namespace resources
 {
+	
+	bool Resources_Init();
+    void Resources_Shutdown();
+
+	
     enum ResourceType
     {
         Resource_None,

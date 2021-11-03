@@ -1,9 +1,20 @@
-#include "ShaderResource.h"
-
-
+#include "Resources.h"
+#include "ShaderManager.h"
 
 namespace resources
 {
+	bool Shader_Load(const char* filepath, ShaderType type)
+	{
+		
+        return true;
+	}
+	
+	void Shader_Unload(Shader_t* shader)
+    {
+        
+    }
+	
+	/*
 	bool ShaderResourceManager::ShaderResource::Load(const str& name, kinc_g4_shader_type_t type)
 	{
         kinc_file_reader_t file;
@@ -38,7 +49,7 @@ namespace resources
     {
         kinc_g4_shader_destroy(&(this->mResoure));
     }
-
+    */
 
     ShaderResourceManager::~ShaderResourceManager()
     {
@@ -47,21 +58,23 @@ namespace resources
         for (i = begin; i != end; i++)
         {
             HShader hs = i->second;
-            ShaderResource* pShaderRes = mResourceManagerImpl.Dereference(hs);
-            pShaderRes->UnLoad();
+            Shader_t* pShaderRes = mResourceManagerImpl.Dereference(hs);
+            Shader_Unload(pShaderRes);
         }
 
     }
 
 
-    HShader ShaderResourceManager::GetShader(const str& name, kinc_g4_shader_type_t shaderType)
+    HShader ShaderResourceManager::GetShader(const tString& name, ShaderType shaderType)
     {
-        NameIndexInsertRc rc = mNameIndex.insert(std::make_pair(name, HShader()));
+        std::pair<const char*, HShader> a = std::make_pair(name, HShader());
+
+        NameIndexInsertRc rc = mNameIndex.insert(a);
 
         if (rc.second)
         {
-            ShaderResource* sh = mResourceManagerImpl.Aquire(rc.first->second);
-            if (!sh->Load(name, shaderType))
+            Shader_t* sh = mResourceManagerImpl.Aquire(rc.first->second);
+            if (! Shader_Load(sh, name, shaderType))
             {
                 DeleteShader(rc.first->second);
                 rc.first->second = HShader();
@@ -73,11 +86,11 @@ namespace resources
 
     void ShaderResourceManager::DeleteShader(HShader hShader)
     {
-        ShaderResource* tex = mResourceManagerImpl.Dereference(hShader);
+        Shader_t* tex = mResourceManagerImpl.Dereference(hShader);
         if (NULL != tex)
         {
-            mNameIndex.erase(mNameIndex.find(tex->mName));
-            tex->UnLoad();
+            mNameIndex.erase(mNameIndex.find(tex->name));
+            Shader_Unload(tex);
             mResourceManagerImpl.Release(hShader);
         }
     }

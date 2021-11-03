@@ -53,7 +53,7 @@ namespace resources
 
         if(0 == id)
         {
-            LOG_F(ERROR, "failed to load cube texture filepath %s ", filepath);
+            LOG_F(ERROR, "failed to load cube texture filepath %s ", filename);
             
             return 0;
         }

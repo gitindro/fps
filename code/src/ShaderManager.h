@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _ShaderManager_h_
+#define _ShaderManager_h_
+
 
 #include "Resources.h"
 #include <glm/glm.hpp> 
@@ -9,18 +11,12 @@
 
 namespace resources
 {
-
-
-	
-	bool Shader_Load(const char* filepath, ShaderType type);
-	void Shader_Unload();
+	bool Shader_Load(Shader_t* ptrShader, const char* filepath, ShaderType type);
+	void Shader_Unload(Shader_t* shader);
 
 	class  ShaderResourceManager
 	{
 	public:
-
-
-
 		typedef HandleMgr<Shader_t, HShader> HShaderResourceManager;
 
 
@@ -33,7 +29,7 @@ namespace resources
 			}
 		};
 
-		typedef std::map< tString, HShader, istring_less>	NameIndex;
+		typedef std::map<tString, HShader, istring_less>	NameIndex;
 		typedef std::pair<NameIndex::iterator, bool> NameIndexInsertRc;
 
 	private:
@@ -44,7 +40,7 @@ namespace resources
 		ShaderResourceManager() {}
 		~ShaderResourceManager();
 
-		HShader GetShader(const tString& name, ShaderType shaderType);
+		HShader GetShader(const char* name, ShaderType shaderType);
 		void DeleteShader(HShader hShader);
 		 
 		const char* GetName(HShader res) const
@@ -59,3 +55,4 @@ namespace resources
 	};
 
 }
+#endif //_ShaderManager_h_

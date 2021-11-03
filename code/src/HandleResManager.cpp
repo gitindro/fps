@@ -1,9 +1,10 @@
 
+#include "HandleResManager.h"
 
 namespace resources
 {
-    #include "HandleResManager.h"
 }
+    
 
 
 

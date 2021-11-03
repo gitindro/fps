@@ -11,11 +11,23 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "")
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "")
 set(GLFW_INSTALL OFF CACHE BOOL "")
 
+
+set(PHYSFS_ARCHIVE_WAD  OFF CACHE BOOL "")
+set(PHYSFS_ARCHIVE_HOG  OFF CACHE BOOL "")
+set(PHYSFS_ARCHIVE_MVL  OFF CACHE BOOL "")
+set(PHYSFS_ARCHIVE_QPAK OFF CACHE BOOL "")
+set(PHYSFS_ARCHIVE_SLB OFF CACHE BOOL "")
+set(PHYSFS_ARCHIVE_VDF OFF CACHE BOOL "")
+set(PHYSFS_ARCHIVE_SLB OFF CACHE BOOL "")
+set(PHYSFS_BUILD_STATIC ON CACHE BOOL "")
+
+set(PHYSFS_BUILD_SHARED OFF CACHE BOOL "")
+set(PHYSFS_BUILD_TEST OFF CACHE BOOL "")
+set(PHYSFS_BUILD_DOCS OFF CACHE BOOL "")
+
 if(WIN32)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()
-
-
 
 add_subdirectory(dependencies/src/glfw)
 add_subdirectory(dependencies/src/SOIL2)
@@ -54,14 +66,16 @@ include_directories(dependencies/src/SOIL2/src/SOIL2)
 include_directories(dependencies/glad/include)
 include_directories(dependencies/src/glm)
 include_directories(dependencies/src/imgui)
+include_directories(dependencies/src/physfs/src)
 
 set_property(TARGET glfw            PROPERTY FOLDER "ThirdPartyLibraries")
 set_property(TARGET glad            PROPERTY FOLDER "ThirdPartyLibraries")
 set_property(TARGET imgui           PROPERTY FOLDER "ThirdPartyLibraries")
 set_property(TARGET soil2           PROPERTY FOLDER "ThirdPartyLibraries")
+set_property(TARGET physfs-static          PROPERTY FOLDER "ThirdPartyLibraries")
 
 SETUP_APP(fps_cmake "shooter")
 
 
-target_link_libraries(fps_cmake glad glfw imgui soil2)
+target_link_libraries(fps_cmake glad glfw imgui soil2 physfs-static)
 add_subdirectory(src/CommandBuffer)

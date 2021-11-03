@@ -10,10 +10,6 @@
 
 namespace resources
 {
-    struct  tagTexture
-    {
-        const char* type = "textureHandle";
-    };
 
     typedef Handle<tagTexture>	HTexture;
 

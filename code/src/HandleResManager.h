@@ -12,9 +12,9 @@ namespace resources
 {
 	template <typename TAG> class  Handle
 	{
-		union
+		union data
 		{
-			enum
+			enum type_size
 			{
 				MAX_BITS_INDEX = 16,
 				MAX_BITS_MAGIC = 16,
@@ -33,27 +33,28 @@ namespace resources
 			u32 m_Handle;
 		};
 
-
+	private:
+		data	mdata;	
 	public:
-		Handle(void) : m_Handle(0) {}
+		Handle(void) {mdata.m_Handle = 0;}
 
 		void Init(u32 index);
 
-		u32				GetIndex()		const { return m_Index; }
-		u32				GetMagic()		const { return m_Magic; }
-		u32				GetHandle()		const { return m_Handle; }
-		bool			IsNull()		const { return !m_Handle; }
+		u32				GetIndex()		const { return mdata.m_Index; }
+		u32				GetMagic()		const { return mdata.m_Magic; }
+		u32				GetHandle()		const { return mdata.m_Handle; }
+		bool			IsNull()		const { return !mdata.m_Handle; }
 
-		operator u32(void)		const { return m_Handle; }
+		operator u32(void)		const { return mdata.m_Handle; }
 
-		template <typename TAG>
-		inline bool operator != (Handle<TAG> r)
+		template <typename U>
+		inline bool operator != (Handle<U> r)
 		{
 			return (this.GetHandle() != r.GetHandle());
 		}
 
-		template <typename TAG>
-		inline bool operator == (Handle<TAG> r)
+		template <typename U>
+		inline bool operator == (Handle<U> r)
 		{
 			return (this->GetHandle() == r.GetHandle());
 		}
@@ -100,16 +101,16 @@ namespace resources
 	void Handle <TAG> ::Init(u32 index)
 	{
 		PPK_ASSERT(IsNull());
-		PPK_ASSERT(index <= MAX_INDEX);
+		PPK_ASSERT(index <= Handle::data::MAX_INDEX);
 
 		static u32  s_AutoMagic = 0;
-		if (++s_AutoMagic > MAX_MAGIC)
+		if (++s_AutoMagic > Handle::data::MAX_MAGIC)
 		{
 			s_AutoMagic = 1; // 0 USED FOR NULL HANDLES
 		}
 
-		m_Index = index;
-		m_Magic = s_AutoMagic;
+		mdata.m_Index = index;
+		mdata.m_Magic = s_AutoMagic;
 	}
 
 
