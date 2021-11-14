@@ -11,8 +11,6 @@
 
 namespace resources
 {
-	bool Shader_Load(Shader_t* ptrShader, const char* filepath, ShaderType type);
-	void Shader_Unload(Shader_t* shader);
 
 	class  ShaderResourceManager
 	{

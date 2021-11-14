@@ -3,16 +3,7 @@
 
 namespace resources
 {
-	bool Shader_Load(const char* filepath, ShaderType type)
-	{
-		
-        return true;
-	}
-	
-	void Shader_Unload(Shader_t* shader)
-    {
-        
-    }
+
 	
 	/*
 	bool ShaderResourceManager::ShaderResource::Load(const str& name, kinc_g4_shader_type_t type)

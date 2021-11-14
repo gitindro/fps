@@ -11,20 +11,14 @@
 namespace resources
 {
 
+    struct tagTexture {};
+    
     typedef Handle<tagTexture>	HTexture;
-
-    GLuint  Texture_load2d(const char* filename);
-    
-    GLuint Texture_loadcube(const char* filename);
-    
-    GLuint Texture_loadNorma(const char* filename);
-
-    void    Texture_unload(GLuint id);
 
     class TextureManager
     {
     public:
-        typedef HandleMgr<Texture_t, HTexture> HTextureResourceManager;
+        typedef HandleMgr<texture_t, HTexture> HTextureResourceManager;
 
         struct istring_less
         {
